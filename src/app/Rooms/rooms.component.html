@@ -1,0 +1,12 @@
+<div class="container">
+    <div class=row>
+        <div class="col s4">
+            <div class="collection">
+                <a href=# class="collection-item" [class.active]="room === selectedRoom" (click)="onClick(room)" *ngFor="let room of rooms">{{room}}</a>
+            </div>
+        </div>
+        <div class="col s8">
+            <room roomName="{{selectedRoom}}"></room>
+        </div>
+    </div>
+</div>
