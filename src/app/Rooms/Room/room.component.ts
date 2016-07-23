@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatMessageModel } from './chatmessage.model';
 import { ChatMessageComponent } from './chatmessage.component';
+import { RoomModel } from './room.model';
 
 @Component({
     moduleId: module.id,
@@ -27,7 +28,7 @@ export class RoomComponent implements OnInit {
 
     ngOnInit() { }
 
-    @Input() roomName: string;
+    @Input() room: RoomModel;
 
     messages: ChatMessageModel[];
 

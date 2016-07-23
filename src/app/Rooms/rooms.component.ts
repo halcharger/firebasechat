@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RoomComponent } from './room/room.component';
 import { NicknameComponent } from './nick/nick.component';
 import { SharedStateService } from '../sharedstate.service';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { RoomModel } from './room/room.model';
 
 @Component({
     moduleId: module.id,
@@ -11,17 +13,16 @@ import { SharedStateService } from '../sharedstate.service';
     providers: [SharedStateService]
 })
 export class RoomsComponent implements OnInit {
-    constructor(private _sharedState: SharedStateService) {
+    constructor(_sharedState: SharedStateService, _af: AngularFire) {
         this.showRooms = _sharedState.nick === null;
+        this.rooms = _af.database.list('rooms');
     }
 
     ngOnInit() { }
 
-    public selectedRoom: string = '';
+    public selectedRoom: RoomModel = {name:''};
 
-    rooms: string[] = [
-        'room 1', 'room2', 'room3'
-    ];
+    rooms: FirebaseListObservable<RoomModel[]>;
 
     onClick(room) {
         this.selectedRoom = room;
@@ -32,7 +33,7 @@ export class RoomsComponent implements OnInit {
     newRoomName: string;
 
     addRoom() {
-        this.rooms.push(this.newRoomName);
+        this.rooms.push({name: this.newRoomName});
         this.newRoomName = null;
     }
 }
