@@ -17,7 +17,9 @@ module.exports = function(defaults) {
             'rxjs/**/*.+(js|js.map)',
             '@angular/**/*.+(js|js.map)',
             'materialize-css/bin/materialize.css',
-            'materialize-css/bin/materialize.js'
+            'materialize-css/bin/materialize.js',
+            'angularfire2/**/*.js',
+            'firebase/*.js'
         ]
     });
 };
