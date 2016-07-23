@@ -9,4 +9,5 @@ import { RoomsComponent } from './rooms/rooms.component'
   directives: [RoomsComponent]
 })
 export class AppComponent {
+  title: string = 'Firebase Chat';
 }
