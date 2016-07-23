@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RoomComponent } from '../room/room.component';
+import { RoomComponent } from './room/room.component';
+import { NicknameComponent } from './nick/nick.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rooms',
     templateUrl: 'rooms.component.html', 
-    directives: [RoomComponent]
+    directives: [RoomComponent, NicknameComponent]
 })
 export class RoomsComponent implements OnInit {
     constructor() { }
@@ -20,5 +21,12 @@ export class RoomsComponent implements OnInit {
 
     onClick(room){
         this.selectedRoom = room;
+    }
+
+    newRoomName: string;
+
+    addRoom(){
+        this.rooms.push(this.newRoomName);
+        this.newRoomName = '';
     }
 }

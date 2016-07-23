@@ -9,5 +9,4 @@ import { RoomsComponent } from './rooms/rooms.component'
   directives: [RoomsComponent]
 })
 export class AppComponent {
-  title = 'app works!';
 }
