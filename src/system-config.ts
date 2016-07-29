@@ -8,15 +8,32 @@
 /** Map relative paths to URLs. */
 const map: any = {
   'firebase': 'vendor/firebase/firebase.js',
-  'angularfire2': 'vendor/angularfire2'
+  'angularfire2': 'vendor/angularfire2',
+  '@ngrx': 'vendor/@ngrx'
 };
 
 /** User packages configuration. */
 const packages: any = {
-  angularfire2: {
+  'angularfire2': {
     defaultExtension: 'js',
     main: 'angularfire2.js'
-  }
+  },
+  '@ngrx/core': {
+            main: 'index.js',
+            format: 'cjs'
+        },
+  '@ngrx/store': {
+            main: 'index.js',
+            format: 'cjs'
+        },
+  '@ngrx/store-devtools': {
+            main: 'index.js',
+            format: 'cjs'
+        },
+  '@ngrx/store-log-monitor': {
+            main: 'index.js',
+            format: 'cjs'
+        }  
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

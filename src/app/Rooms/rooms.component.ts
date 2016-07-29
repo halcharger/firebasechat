@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomComponent } from './room/room.component';
 import { NicknameComponent } from './nick/nick.component';
-import { SharedStateService } from '../sharedstate.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { RoomModel } from './room/room.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../shared/store';
+import { Observable } from 'rxjs/RX';
+import { AddRoom, SelectRoom } from '../shared/actions';
+import { instrumentStore } from '@ngrx/store-devtools';
+import { useLogMonitor } from '@ngrx/store-log-monitor';
+
 
 @Component({
     moduleId: module.id,
     selector: 'rooms',
     templateUrl: 'rooms.component.html',
-    directives: [RoomComponent, NicknameComponent],
-    providers: [SharedStateService]
+    directives: [RoomComponent, NicknameComponent]
 })
 export class RoomsComponent implements OnInit {
-    constructor(_sharedState: SharedStateService, _af: AngularFire) {
-        this.showRooms = _sharedState.nick === null;
-        this.rooms = _af.database.list('rooms');
+    constructor(_af: AngularFire, private store: Store<AppState>) {
+        //this.rooms = _af.database.list('rooms');
+        this.rooms = store.select('rooms');
     }
 
     ngOnInit() { }
 
-    public selectedRoom: RoomModel = {name:''};
+    rooms: any;
 
-    rooms: FirebaseListObservable<RoomModel[]>;
-
-    onClick(room) {
-        this.selectedRoom = room;
+    onClick(room:RoomModel) {
+        this.store.dispatch(SelectRoom(room));
     }
 
     showRooms: boolean;
@@ -33,7 +36,8 @@ export class RoomsComponent implements OnInit {
     newRoomName: string;
 
     addRoom() {
-        this.rooms.push({name: this.newRoomName});
+        this.store.dispatch(AddRoom({name:this.newRoomName}))
         this.newRoomName = null;
+        console.log('this.rooms: ', this.rooms);
     }
 }

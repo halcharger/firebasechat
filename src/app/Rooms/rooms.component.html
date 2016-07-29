@@ -6,20 +6,17 @@
                 <h5>Chat Rooms</h5>
             </div>
             <div class="row">
-                <div class="input-field col s10">
-                    <input [(ngModel)]="newRoomName" type="text" class="validate">
+                <div class="input-field col s12">
+                    <input name="new_room_name" [(ngModel)]="newRoomName" (keyup.enter)="addRoom()" type="text" class="validate">
                     <label for="new_room_name">Enter new room name here</label>
-                </div>
-                <div class="col s2">
-                    <button type="submit" (click)="addRoom()" class=" btn-floating btn-large waves-effect waves-light red "><i class="material-icons ">add</i></button>
                 </div>
             </div>
             <div class="collection ">
-                <a href=# class="collection-item " [class.active]="room===selectedRoom" (click)="onClick(room) " *ngFor="let room of rooms | async">{{room.name}}</a>
+                <a href="#" class="collection-item " [class.active]="room===selectedRoom " (click)="onClick(room) " *ngFor="let room of rooms | async ">{{room.name}}</a>
             </div>
         </div>
         <div class="col s8 ">
-            <room room="{{selectedRoom}}"></room>
+            <room></room>
         </div>
     </div>
 </div>

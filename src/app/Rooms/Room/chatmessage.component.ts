@@ -7,10 +7,10 @@ import { ChatMessageModel } from './chatmessage.model';
     templateUrl: 'chatmessage.component.html'
 })
 export class ChatMessageComponent implements OnInit {
-    constructor() { }
+    constructor() { 
+    }
 
+    @Input() message: string;
     ngOnInit() { }
-
-    @Input() message: ChatMessageModel;
 
 }
