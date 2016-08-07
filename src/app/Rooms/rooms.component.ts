@@ -1,43 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomComponent } from './room/room.component';
 import { NicknameComponent } from './nick/nick.component';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { RoomModel } from './room/room.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../shared/store';
-import { Observable } from 'rxjs/RX';
-import { AddRoom, SelectRoom } from '../shared/actions';
-import { instrumentStore } from '@ngrx/store-devtools';
-import { useLogMonitor } from '@ngrx/store-log-monitor';
-
+import { RoomsService } from '../shared/rooms.service';
 
 @Component({
     moduleId: module.id,
     selector: 'rooms',
     templateUrl: 'rooms.component.html',
-    directives: [RoomComponent, NicknameComponent]
+    directives: [RoomComponent, NicknameComponent],
+    providers: [RoomsService],
+    styleUrls: ['rooms.component.css']
 })
 export class RoomsComponent implements OnInit {
-    constructor(_af: AngularFire, private store: Store<AppState>) {
-        //this.rooms = _af.database.list('rooms');
-        this.rooms = store.select('rooms');
+    constructor(private roomsService: RoomsService) {
     }
 
     ngOnInit() { }
 
-    rooms: any;
-
-    onClick(room:RoomModel) {
-        this.store.dispatch(SelectRoom(room));
-    }
-
-    showRooms: boolean;
-
     newRoomName: string;
 
+    onClick(room:RoomModel) {
+        console.log('selecting room: ', room.name);
+        this.roomsService.setSelectedRoom(room);
+    }
+
     addRoom() {
-        this.store.dispatch(AddRoom({name:this.newRoomName}))
+        this.roomsService.addRoom(this.newRoomName)
         this.newRoomName = null;
-        console.log('this.rooms: ', this.rooms);
     }
 }

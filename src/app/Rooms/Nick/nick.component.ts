@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../shared/store';
-import { ChangeNickname } from '../../shared/actions';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { RoomsService } from '../../shared/rooms.service';
 
 @Component({
     moduleId: module.id,
@@ -9,13 +8,8 @@ import { ChangeNickname } from '../../shared/actions';
     templateUrl: 'nick.component.html'
 })
 export class NicknameComponent implements OnInit {
-    constructor(private _store: Store<AppState>) { }
+    constructor(private roomsService: RoomsService) { }
 
     ngOnInit() { }
-
-    onNickChange(newNickInput){
-        console.log('onNickChange(newNickInput): ', newNickInput.value);
-        this._store.dispatch(ChangeNickname(newNickInput.value));
-    }
 
 }

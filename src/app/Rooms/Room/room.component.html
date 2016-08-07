@@ -2,10 +2,10 @@
     <div class="col s12 m12">
         <div class="card large lighten-1">
             <div class="card-content grey-text">
-                <span class="card-title">Chat Room - {{room.name}}</span>
+                <span class="card-title">Chat Room - {{roomsService.selectedRoom?.name}}</span>
                 <div>
 
-                    <chatmessage [message]="msg" *ngFor="let msg of messages | async"></chatmessage>
+                    <chatmessage [message]="msg" *ngFor="let msg of roomsService.chatMessages | async"></chatmessage>
                 </div>
             </div>
             <div class="card-action">
